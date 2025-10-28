@@ -19,3 +19,44 @@ This figure illustrates black-box victim models that incorporate prompt filters 
 (c) By incorporating text-image and image-image similarities across $p_{tar}, I_{gen}, \text{and}\ I_{tar}$, multimodal loss is designed to optimize the prompt encoder parameters $\varsigma$ for generating adversarial prompts.
 
 ## Installation
+1. A suitable conda environment named *pla* can be created and activated with:
+```
+conda env create -f environment.yaml
+conda activate pla
+```
+2. Download the necessary T2I models, follow these codes:
+```
+mkdir checkpoints
+cd checkpoints
+git-lfs install
+git clone https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-inpainting
+```
+```
+from diffusers import StableDiffusionInpaintPipeline
+
+pipe = StableDiffusionInpaintPipeline.from_pretrained("/checkpoints/stable-diffusion-inpainting").to(device)
+```
+## Usage
+To perform the attack, follow these steps:
+
+  1. Set the path of the victim model's checkpoint in line 208 of the code `attack.py`:
+  ```
+  pipe = StableDiffusionInpaintPipeline.from_pretrained("/checkpoints/stable-diffusion-inpainting").to(device)
+  ```
+  2. Run the code using the following command:
+  ```
+  python attack.py
+  ```
+  The code will automatically print the obtained successful adversarial prompts.
+
+  ## Citation
+  If you like or use our work, please cite us:
+  ```
+  @inproceedings{lyu2025pla,
+  title={PLA: Prompt Learning Attack against Text-to-Image Generative Models},
+  author={Xinqi Lyu, Yihao Liu, Yanjie Li, Bin Xiao},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={16851--16860},
+  year={2025}
+}
+  ```
