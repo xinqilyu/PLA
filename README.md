@@ -24,26 +24,9 @@ This figure illustrates black-box victim models that incorporate prompt filters 
 conda env create -f environment.yaml
 conda activate pla
 ```
-2. Download the necessary T2I models, follow these codes:
-```
-mkdir checkpoints
-cd checkpoints
-git-lfs install
-git clone https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-inpainting
-```
-```
-from diffusers import StableDiffusionInpaintPipeline
 
-pipe = StableDiffusionInpaintPipeline.from_pretrained("/checkpoints/stable-diffusion-inpainting").to(device)
-```
 ## Usage
 To perform the attack, follow these steps:
-
-  1. Set the path of the victim model's checkpoint in line 208 of the code `attack.py`:
-  ```
-  pipe = StableDiffusionInpaintPipeline.from_pretrained("/checkpoints/stable-diffusion-inpainting").to(device)
-  ```
-  2. Run the code using the following command:
   ```
   python attack.py
   ```
